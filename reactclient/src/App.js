@@ -1,24 +1,24 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
 
 
 
 export default function App() {
   const [posts, setPosts] = useState([]);
 
-  function getPosts(){
+  function getPosts() {
     const url = 'https://localhost:7100/get-all-posts';
     fetch(url, {
-      method : 'GET'
+      method: 'GET'
     })
-    .then(response => response.json())
-    .then(postsFromServer => {
-      console.log(postsFromServer);
-      setPosts(postsFromServer);
-    } )
-    .catch((error) =>{
-      console.log(error);
-      alert(error);
-    } );
+      .then(response => response.json())
+      .then(postsFromServer => {
+        console.log(postsFromServer);
+        setPosts(postsFromServer);
+      })
+      .catch((error) => {
+        console.log(error);
+        alert(error);
+      });
 
   }
 
@@ -28,20 +28,20 @@ export default function App() {
       <div className="row min-vh-100">
         <div className="col d-flex flex-column justify-content-center align-items-center">
           <div>
-          <h1>ASP.NET - React </h1>
-          <div className="mt-5">
-            <button onClick={getPosts} className="btn btn-dark btn-lg w-100">Get Post From Server</button>
-            <button onClick={() => {}} className="btn btn-secondary btn-lg w-100 mt-4">Create new Post</button>
+            <h1>ASP.NET - React </h1>
+            <div className="mt-5">
+              <button onClick={getPosts} className="btn btn-dark btn-lg w-100">Get Post From Server</button>
+              <button onClick={() => { }} className="btn btn-secondary btn-lg w-100 mt-4">Create new Post</button>
+
+            </div>
 
           </div>
+          {posts.length > 0 && renderPostsTable()}
 
-          </div>
-          {renderPostsTable() }
-          
-          
+
         </div>
       </div>
-      
+
     </div>
   );
 
@@ -59,17 +59,20 @@ export default function App() {
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <th scope="row">1</th>
-              <td>Post 1 Title</td>
-              <td>Post 1 Content</td>
-              <td>
-                <button className="btn btn-dark btn-lg mx-3 my-3">Update</button>
-                <button className="btn btn-secondary btn-lg ">Delete</button>
-              </td>
-            </tr>
+            { posts.map((post) => (
+                <tr key={post.postId}>
+                  <th scope="row">{post.postId}</th>
+                  <td>{post.title}</td>
+                  <td>{post.content}</td>
+                  <td>
+                    <button className="btn btn-dark btn-lg mx-3 my-3">Update</button>
+                    <button className="btn btn-secondary btn-lg ">Delete</button>
+                  </td>
+                </tr>
+              ))}
           </tbody>
         </table>
+        <button onClick={() => setPosts([])} className="btn btn-dark btn-lg w-100">Empty React posts array</button>
       </div>
     );
   }
