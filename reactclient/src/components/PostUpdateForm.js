@@ -1,10 +1,10 @@
 import React, { useState } from 'react'
 import Constants from '../utilities/Constants'
 
-export default function PostCreateForm(props) {
+export default function PostUpdateForm(props) {
     const initialformData = Object.freeze({
-        title: "Post X",
-        content: "This is post X and also "
+        title: props.post.title,
+        content: props.post.content
     });
 
     const [formData, setformData] = useState(initialformData);
@@ -22,20 +22,20 @@ export default function PostCreateForm(props) {
     const handleSubmit = (e) => {
         e.preventDefault();
 
-        const postCreate = {
-            postId: 0,
+        const postToUpdate = {
+            postId: props.post.postId,
             title: formData.title,
             content: formData.content
         };
 
-        const url = Constants.API_URL_CREATE_POST;
+        const url = Constants.API_URL_UPDATE_POST;
 
         fetch(url, {
-            method: 'POST',
+            method: 'PUT',
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify(postCreate)
+            body: JSON.stringify(postToUpdate)
         })
             .then(response => response.json())
             .then(responseFromServer => {
@@ -46,13 +46,13 @@ export default function PostCreateForm(props) {
                 alert(error);
             });
 
-        props.onPostCreated(postCreate);
+        props.onPostUpdated(postToUpdate);
     };
 
 
     return (
         <form className='w-100 px-5'>
-            <h1 className='mt-5'>Create new Post</h1>
+            <h1 className='mt-5'>Updating the post Title "{props.post.title}".</h1>
             <div className='mt-5'>
                 <label className='h3 form-label'>Post Title</label>
                 <input value={formData.title} name="title" type="text" className='form-control' onChange={handleChange} />
@@ -64,7 +64,7 @@ export default function PostCreateForm(props) {
             </div>
 
             <button onClick={handleSubmit} className="btn btn-dark btn-lg w-100 mt-5">Submit</button>
-            <button onClick={() => props.onPostCreated(null)} className="btn btn-secondary btn-lg w-100 mt-3">Cancel</button>
+            <button onClick={() => props.onPostUpdated(null)} className="btn btn-secondary btn-lg w-100 mt-3">Cancel</button>
 
         </form>
     );
