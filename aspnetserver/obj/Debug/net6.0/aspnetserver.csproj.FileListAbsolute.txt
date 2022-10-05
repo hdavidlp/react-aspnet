@@ -52,3 +52,4 @@ C:\Users\Hector Lopez P\source\repos\ASPNetCoreReactTutorial\aspnetserver\bin\De
 C:\Users\Hector Lopez P\source\repos\ASPNetCoreReactTutorial\aspnetserver\bin\Debug\net6.0\runtimes\win-x86\native\e_sqlite3.dll
 C:\Users\Hector Lopez P\source\repos\ASPNetCoreReactTutorial\aspnetserver\bin\Debug\net6.0\Humanizer.dll
 C:\Users\Hector Lopez P\source\repos\ASPNetCoreReactTutorial\aspnetserver\bin\Debug\net6.0\Microsoft.EntityFrameworkCore.Design.dll
+C:\Users\Hector Lopez P\source\repos\ASPNetCoreReactTutorial\aspnetserver\bin\Debug\net6.0\Data\AppDB.db
